@@ -6,6 +6,9 @@
 .RData
 .RDataTmp
 
+# Ignore Env file
+env/
+
 # User-specific files
 .Ruserdata
 
