@@ -2,9 +2,6 @@
 .Rhistory
 .Rapp.history
 
-# Ignore the env folder
-env/
-
 # Session Data files
 .RData
 .RDataTmp
