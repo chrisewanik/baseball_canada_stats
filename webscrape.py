@@ -55,6 +55,49 @@ def scrape_batting_table(season_id):
             rows.append(row)
     return pd.DataFrame(rows, columns=headers)
 
+def scrape_team_tables(season_id):
+    """Scrape the batting table from the CCBC website for a given season_id
+
+    Args:
+        season_id (str): The season_id to scrape the batting table for
+
+    Returns:
+        pd.DataFrame: The batting table for the given season_id
+    """    
+    # Create the path string using the season_id
+    path = f'http://pointstreak.com/baseball/stats.html?{season_id}&view=teambatting'
+    
+    # Get the page
+    page = requests.get(path)
+    # Create the soup object
+    soup = BeautifulSoup(page.content, 'html.parser')
+    # Get the table
+    table = soup.select('#bat_first > table:nth-child(1)')
+    
+    # Check if the table is empty
+    if not table:
+        print(f'No table found for season_id {season_id}')
+        return None
+    
+    # Get the headers (th) from the table
+    headers = [th.text.strip() for th in table[0].find_all('th')]
+    # Add the season_id to the headers
+    headers.append('season_id')
+    
+    # Create an empty list to store the rows
+    rows = []
+    
+    # Get the rows (tr) from the table
+    for tr in table[0].find_all('tr'):
+        # Get the data (td) from the row
+        row = [td.text.strip() for td in tr.find_all('td')]
+        # Check if the row is empty if not append the season_id to the row and append the row to the rows list
+        if row:
+            row.append(season_id)
+            rows.append(row)
+    return pd.DataFrame(rows, columns=headers)
+
+
 
 # %%
 # Function to perform the scraping
