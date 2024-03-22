@@ -1,0 +1,24 @@
+/* CSS */
+
+
+/* Removing Weird Extra Dashboard Padding */
+.container-fluid {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+/* Header Title Color */
+.main-header {
+    background-color: #a60000;
+}
+
+
+/* Collapse Button Color */
+.skin-blue .main-header .navbar .sidebar-toggle {
+    color: #00a65a;
+}
+
+.fuckedthing {
+    background-color : #de218c;
+}
+
